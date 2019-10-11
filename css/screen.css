@@ -20,6 +20,8 @@
 
 :root {
   /* Global colors */
+  --global-page-color: var(--color-neutral-xxxx-dark);
+  --global-page-backgroundColor: var(--color-neutral-xxxx-light);
   --global-color-alpha-light: #4f95ff;
   --global-color-alpha: #3385ff;
   --global-color-alpha-dark: #2e77e6;
@@ -528,14 +530,11 @@ input::placeholder {
 */
 
 .c-logo {
-  --logo__path--1--Fill: var(--global-color-neutral-xxxx-dark);
-  --logo__path--2--Fill: var(--global-color-alpha);
-  --logo__path--3--Fill: var(--global-color-alpha-x-dark);
   height: var(--global-whitespace);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: var(--global-whitespace-xl);
+  margin-bottom: var(--global-whitespace-lg);
 }
 
 .c-logo__symbol {
@@ -543,15 +542,15 @@ input::placeholder {
 }
 
 .c-logo__path--1 {
-  fill: var(--logo__path--1--Fill);
+  fill: var(--logo__path--1--fill, var(--global-color-neutral-xxxx-dark));
 }
 
 .c-logo__path--2 {
-  fill: var(--logo__path--2--Fill);
+  fill: var(--logo__path--2--fill, var(--global-color-alpha));
 }
 
 .c-logo__path--3 {
-  fill: var(--logo__path--3--Fill);
+  fill: var(--logo__path--3--fill, var(--global-color-alpha-x-dark));
 }
 
 .c-label {
@@ -611,10 +610,18 @@ input::placeholder {
     ---
     Everything form related here
 */
-
+.c-form-field {
+  position: relative;
+}
 .c-form-field--option {
   display: flex;
   align-items: center;
+}
+/* .c-form-field--floating {
+
+} */
+.c-input:focus .c-form-field {
+  translate: translateY(-24px);
 }
 
 /*
@@ -628,7 +635,7 @@ input::placeholder {
   -moz-appearance: none;
   appearance: none;
   width: 100%;
-  border: 1px solid var(--global-input-borderColor);
+  border: var(--global-borderWidth) solid var(--input-borderColor, var(--global-input-borderColor));
   border-radius: var(--global-borderRadius);
   background-color: var(--global-input-backgroundColor);
   color: var(--global-input-color);
@@ -655,6 +662,10 @@ Input password with toggle checkbox on top of it needs
 more padding on the right to avoid overlap
 */
 
+.has-error {
+  --label-color: var(--global-color-error);
+  --input-borderColor: var(--global-input-error-borderColor);
+}
 .c-input--password-with-toggle {
   padding-right: 52px;
 }
@@ -677,11 +688,25 @@ more padding on the right to avoid overlap
   padding-bottom: var(--global-whitespace-sm);
   font-size: 14px;
   line-height: 16px;
-  color: var(--label-color);
+  color: var(--label-color, var(--global-color-neutral-xx-dark));
 }
-
+.c-label--floating {
+  position: absolute;
+  top: 12px;
+  left: 8px;
+  padding: 4px 8px;
+  will-change: transform;
+  transform: translateY(0);
+  transition: transform 200ms ease-in-out;
+  box-shadow: 0 0 4px 4px rgba(255, 255, 255, 0.8);
+  background: white;
+}
 .c-label--option {
   padding-bottom: 0;
+}
+.is-floating,
+.c-form-field:focus-within .c-label--floating {
+  transform: translateY(calc(var(--global-baseline) * -3));
 }
 
 /*
@@ -830,7 +855,7 @@ more padding on the right to avoid overlap
   position: relative;
 }
 
-.c-toggle {
+.c-password-toggle__label {
   position: absolute;
   display: flex;
   top: 0;
@@ -840,18 +865,25 @@ more padding on the right to avoid overlap
   padding-top: 14px;
 }
 
-.c-toggle__symbol {
+.c-password-toggle__symbol-show {
   display: block;
   width: 20px;
   height: 20px;
   fill: var(--global-color-neutral-x-light);
 }
 
-.c-toggle__symbol__hidden {
+.c-password-toggle__symbol-hide {
   display: none;
   width: 20px;
   height: 20px;
   fill: var(--global-color-neutral-x-light);
+}
+
+.c-option-password:checked + .c-password-toggle__label .c-password-toggle__symbol-show {
+  display: none;
+}
+.c-option-password:checked + .c-password-toggle__label .c-password-toggle__symbol-hide {
+  display: block;
 }
 /*
     Component: Custom Toggle
@@ -1384,5 +1416,53 @@ No media query since this is the default in mobile first design
   .has-error {
     --label-color: var(--global-color-error);
     --input-borderColor: var(--global-input-error-borderColor);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .c-custom-option__fake-input--checkbox {
+    background-color: var(--global-color-neutral-xxxx-dark);
+    border-color: var(--global-color-neutral-xxxx-dark);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .c-label {
+    color: var(--global-color-neutral-x-light);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .c-input {
+    background-color: var(--global-color-neutral-xxxx-dark);
+    border-color: var(--global-color-neutral-xxxx-dark);
+    color: var(--global-color-neutral-x-light);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .c-card__body {
+    background-color: var(--global-color-neutral-xxx-dark);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .c-card__footer {
+    background-color: var(--global-color-neutral-xxx-dark);
+    border-top-color: var(--global-color-neutral-xxxx-dark);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .c-card {
+    background-color: var(--global-color-neutral-xxxx-dark);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .c-logo {
+    --logo__path--1--fill: White;
+    --logo__path--2--fill: var(--logo__path--1--fill);
+    --logo__path--3--fill: var(--logo__path--1--fill);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  html {
+    background-color: var(--global-color-neutral-xxxx-dark);
+    color: white;
   }
 }
