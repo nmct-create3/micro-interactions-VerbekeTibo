@@ -37,26 +37,20 @@
         </h1>
         <form class="c-card" action="#">
           <div class="c-card__body">
-            <h2 class="c-card__title">
-              Sign in to your account
-            </h2>
+            <h2 class="c-card__title">Sign in to your account</h2>
             <p class="c-form-field">
-              <label class="c-label" for="username">
-                Email address
-              </label>
+              <label class="c-label" for="username"> Email address </label>
               <input class="c-input" type="email" name="username" id="username" placeholder="e.g. john@doe.com" required />
             </p>
 
             <p class="c-form-field">
-              <label class="c-label" for="password">
-                Password
-              </label>
+              <label class="c-label" for="password"> Password </label>
               <span class="c-toggle-container">
-                <input class="c-input " type="password" name="password" id="password" required />
+                <input class="c-input" type="password" name="password" id="password" required />
 
-                <input class="o-hide-accessible c-option-password c-option--hidden" type="checkbox" id="eye"  />
+                <input class="o-hide-accessible c-option-password c-option--hidden" type="checkbox" id="eye" />
 
-                <label class="c-password-toggle__label "for="eye" onclick="Toggle()">
+                <label class="c-password-toggle__label" for="eye" onclick="Toggle()">
                   <svg class="c-password-toggle__symbol-show" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                     <path d="M6.4,133.876a11,11,0,0,1,19.571-.061l.029.061a11,11,0,0,1-19.571.061l-.029-.061Zm9.8,4a4,4,0,1,0,0-8h0a4,4,0,0,0,0,8Zm0-2a2,2,0,0,1,0-4h0a2,2,0,1,1,0,4Z" transform="translate(-6.2 -123.876)" />
                   </svg>
@@ -65,18 +59,17 @@
                   </svg>
                 </label>
               </span>
-              <script> 
-                // Change the type of input to password or text 
-                    function Toggle() { 
-                        var temp = document.getElementById("password"); 
-                        if (temp.type === "password") { 
-                            temp.type = "text"; 
-                        } 
-                        else { 
-                            temp.type = "password"; 
-                        } 
-                    } 
-            </script>
+              <script>
+                // Change the type of input to password or text
+                function Toggle() {
+                  var temp = document.getElementById('password');
+                  if (temp.type === 'password') {
+                    temp.type = 'text';
+                  } else {
+                    temp.type = 'password';
+                  }
+                }
+              </script>
             </p>
             <!-- Custom checkbox -->
             <p class="c-form-field c-form-field--option">
@@ -95,9 +88,7 @@
               <button class="o-button-reset c-button js-sign-in-button">Sign in</button>
             </p>
             <p class="u-text-sm u-align-text-center">
-              <a href="#!">
-                Forgot password?
-              </a>
+              <a href="#!"> Forgot password? </a>
             </p>
           </div>
           <div class="c-card__footer">
